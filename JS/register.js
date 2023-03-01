@@ -6,14 +6,16 @@ const nameInput = document.querySelector("#name");
 const emailInput = document.querySelector("#email");
 const passwordInput = document.querySelector("#password");
 
-let userInput = {
-  name: "empty_name",
-  email: "empty_email",
-  password: "empty_password",
-};
+let userInput = {};
 
-async function registerUser(url, userData) {
+registerButton.addEventListener("click", async (registerUserUrl, userData) => {
   try {
+    userInput = {
+      name: nameInput.value,
+      email: emailInput.value,
+      password: passwordInput.value,
+    };
+    console.log(userInput);
     const postData = {
       method: "POST",
       headers: {
@@ -23,5 +25,4 @@ async function registerUser(url, userData) {
     };
     const response = fetch(url);
   } catch (error) {}
-}
-registerUser(registerUserUrl, userInput);
+});
