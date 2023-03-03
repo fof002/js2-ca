@@ -5,24 +5,35 @@ const registerButton = document.querySelector("#register");
 const nameInput = document.querySelector("#name");
 const emailInput = document.querySelector("#email");
 const passwordInput = document.querySelector("#password");
-
+const errorContainer = document.querySelector("#error-container");
 let userInput = {};
 
-registerButton.addEventListener("click", async (registerUserUrl, userData) => {
+// -----------------registrers user
+registerButton.addEventListener("click", async () => {
+  createUserInput();
   try {
-    userInput = {
-      name: nameInput.value,
-      email: emailInput.value,
-      password: passwordInput.value,
-    };
-    console.log(userInput);
     const postData = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(userData),
+      body: JSON.stringify(userInput),
     };
-    const response = fetch(url);
-  } catch (error) {}
+    const response = await fetch(registerUserUrl, postData);
+    const json = await response.json();
+  } catch (error) {
+    console.log(error);
+  }
 });
+
+//function for creating userinput from input fields
+const createUserInput = () => {
+  !nameInput.value || !emailInput.value || !passwordInput.value
+    ? (errorContainer.innerHTML = `Fill out all the fields`)
+    : (userInput = {
+        name: nameInput.value.trim(),
+        email: emailInput.value.trim(),
+        password: passwordInput.value.trim(),
+      });
+};
+//---------------------------------------
