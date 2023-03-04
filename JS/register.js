@@ -8,9 +8,20 @@ const passwordInput = document.querySelector("#password");
 const errorContainer = document.querySelector("#error-container");
 let userInput = {};
 
-// -----------------registrers user
-registerButton.addEventListener("click", async () => {
-  createUserInput();
+// -----------------registrers user eventlistener
+registerButton.addEventListener("click", () => {
+  if (!nameInput.value || !emailInput.value || !passwordInput.value) {
+    errorContainer.innerHTML = `Fill out all the fields`;
+  } else {
+    errorContainer.innerHTML = "";
+    createUserInput();
+    registerUser();
+  }
+});
+//----------------------------------
+
+//Function for registering user
+async function registerUser() {
   try {
     const postData = {
       method: "POST",
@@ -21,19 +32,29 @@ registerButton.addEventListener("click", async () => {
     };
     const response = await fetch(registerUserUrl, postData);
     const json = await response.json();
+    console.log(json);
+    if (json.id) {
+      //checks if the server returns an object with an "ID" property, if it doesn't errormessages are shown.
+      errorContainer.innerHTML = `<h3>User created!</h3>`;
+    } else {
+      const errorArray = json.errors;
+      errorArray.forEach((errormessage) => {
+        const errorUl = document.createElement("ul");
+        errorContainer.appendChild(errorUl);
+        errorUl.innerHTML += `<li>${errormessage.message}</li>`;
+      });
+    }
   } catch (error) {
-    console.log(error);
+    errorContainer.innerHTML = error;
   }
-});
+}
 
 //function for creating userinput from input fields
 const createUserInput = () => {
-  !nameInput.value || !emailInput.value || !passwordInput.value
-    ? (errorContainer.innerHTML = `Fill out all the fields`)
-    : (userInput = {
-        name: nameInput.value.trim(),
-        email: emailInput.value.trim(),
-        password: passwordInput.value.trim(),
-      });
+  userInput = {
+    name: nameInput.value.trim(),
+    email: emailInput.value.trim(),
+    password: passwordInput.value.trim(),
+  };
 };
 //---------------------------------------
