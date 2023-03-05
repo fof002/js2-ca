@@ -8,6 +8,7 @@ const passwordInput = document.querySelector("#password");
 const errorContainer = document.querySelector("#error-container");
 const errorUl = document.querySelector("#error-ul");
 let userInput = {};
+
 // -----------------registrers user eventlistener
 registerButton.addEventListener("click", () => {
   if (
@@ -18,7 +19,7 @@ registerButton.addEventListener("click", () => {
     createUserInput();
     registerUser();
   } else {
-    errorContainer.innerHTML = `Check user registration demands below`;
+    errorContainer.innerHTML = `Please fill out the registration form`;
   }
 });
 //----------------------------------
@@ -61,7 +62,7 @@ const createUserInput = () => {
 //---------------------------------------
 
 //validate input in registration fields
-document.addEventListener("keydown", validateUserInput);
+document.addEventListener("keyup", validateUserInput);
 
 function validateUserInput() {
   errorUl.innerHTML = "";
