@@ -44,8 +44,8 @@ async function logInUser() {
 
 const createLoginInput = () => {
   loginInput = {
-    email: emailInput.value.trim(),
-    password: passwordInput.value.trim(),
+    email: emailInput.value,
+    password: passwordInput.value,
   };
 };
 
