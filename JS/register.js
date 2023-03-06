@@ -36,7 +36,6 @@ async function registerUser() {
     };
     const response = await fetch(registerUserUrl, postData);
     const json = await response.json();
-    console.log(json);
     if (json.id) {
       //checks if the server returns an object with an "ID" property, if it doesn't errormessages are shown.
       errorContainer.innerHTML = `<h3>User created!</h3>`;
