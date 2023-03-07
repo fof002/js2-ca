@@ -1,0 +1,23 @@
+{
+  "name": "js2-ca",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fof002/js2-ca.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fof002/js2-ca/issues"
+  },
+  "homepage": "https://github.com/fof002/js2-ca#readme",
+  "dependencies": {
+    "bootstrap": "^5.2.0"
+  }
+}

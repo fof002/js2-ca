@@ -9,6 +9,7 @@ let loginInput = {};
 
 //---------------- Login eventlistener for submit
 loginButton.addEventListener("click", () => {
+  event.preventDefault();
   fetchLoginInput();
   logInUser(loginInput);
 });
