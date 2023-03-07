@@ -9,40 +9,41 @@ let loginInput = {};
 
 //---------------- Login eventlistener for submit
 loginButton.addEventListener("click", () => {
-  createLoginInput();
-  logInUser();
+  fetchLoginInput();
+  logInUser(loginInput);
 });
 
 //----------------------------------------------
 
 //------------------Function for API call for login
 
-async function logInUser() {
+async function logInUser(userInput) {
   try {
-    console.log(loginInput);
     const postData = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(loginInput),
+      body: JSON.stringify(userInput),
     };
-    console.log(postData);
     const response = await fetch(logInUrl, postData);
     const json = await response.json();
     if (json.accessToken) {
       const accessToken = json.accessToken;
       localStorage.setItem("accessToken", accessToken);
-      location.assign("feed.html");
+      //location.assign("feed.html");
+    } else {
+      errorContainer.innerHTML = "Invalid username or password";
+      passwordInput.innerHTML = "";
     }
-  } catch {
-    console.log("sod off!");
+  } catch (error) {
+    console.log(error);
   }
 }
 
 //------------------Creating login-input
 
-const createLoginInput = () => {
+const fetchLoginInput = () => {
   loginInput = {
     email: emailInput.value,
     password: passwordInput.value,
