@@ -1,3 +1,6 @@
 .error {
   color: red;
 }
+.center-page {
+  margin: 0 auto;
+}

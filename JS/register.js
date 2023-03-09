@@ -17,9 +17,10 @@ registerButton.addEventListener("click", () => {
     passwordInput.value.trim().length >= 8
   ) {
     createUserInput();
+    console.log(userInput);
     registerUser();
   } else {
-    errorContainer.innerHTML = `Please fill out the registration form`;
+    errorContainer.innerHTML = `Something went wrong. Please try again or contatct us`;
   }
 });
 //----------------------------------
@@ -85,3 +86,13 @@ function validateUserInput() {
   }
 }
 //-----------------------------------------------
+/*//function print onLoad
+const url = new URL(document.location);
+const printPage = () => {
+  if (url.searchParamsurl.get("print") === true) {
+    document.printPage();
+  }
+};
+document.addEventListener("afterPrint", () => {
+  location.assign("url til nasjonale ops");
+}); */

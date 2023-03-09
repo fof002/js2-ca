@@ -1,6 +1,6 @@
 import { API_BASE_URL } from "./base-URL.js";
 
-const logInUrl = API_BASE_URL + "auction/auth/login";
+const logInUrl = API_BASE_URL + "social/auth/login";
 const emailInput = document.querySelector("#email");
 const passwordInput = document.querySelector("#password");
 const loginButton = document.querySelector("#login-button");
@@ -8,12 +8,11 @@ const errorContainer = document.querySelector("#error-container");
 let loginInput = {};
 
 //---------------- Login eventlistener for submit
-loginButton.addEventListener("click", () => {
+loginButton.addEventListener("click", (event) => {
   event.preventDefault();
-  fetchLoginInput();
+  getLoginInput();
   logInUser(loginInput);
 });
-
 //----------------------------------------------
 
 //------------------Function for API call for login
@@ -29,10 +28,11 @@ async function logInUser(userInput) {
     };
     const response = await fetch(logInUrl, postData);
     const json = await response.json();
+    console.log(json);
     if (json.accessToken) {
       const accessToken = json.accessToken;
       localStorage.setItem("accessToken", accessToken);
-      //location.assign("feed.html");
+      location.assign("register.html");
     } else {
       errorContainer.innerHTML = "Invalid username or password";
       passwordInput.innerHTML = "";
@@ -44,10 +44,10 @@ async function logInUser(userInput) {
 
 //------------------Creating login-input
 
-const fetchLoginInput = () => {
+const getLoginInput = () => {
   loginInput = {
-    email: emailInput.value,
-    password: passwordInput.value,
+    email: emailInput.value.trim(),
+    password: passwordInput.value.trim(),
   };
 };
 

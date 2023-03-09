@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <meta name="description" content="This is your awsome profile" />
+    <title>Your Profile</title>
+  </head>
+  <body>
+    <header class="bg-primary">
+      <nav
+        class="navbar d-flex justify-content-between px-3 text-white shadow-lg"
+      >
+        <a
+          class="navbar-brand rounded px-2 bg-light text-primary border-primary"
+          href="index.html"
+          >LOGO</a
+        >
+        <div class="d-none d-lg-block">
+          <label for="search">Search</label>
+          <input
+            type="text"
+            name="search"
+            id="search"
+            class="ms-4"
+            style="width: 15em"
+          />
+        </div>
+        <ul class="nav">
+          <li class="nav-item">
+            <a href="profile.html" class="nav-link text-white">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a href="login.html" class="nav-link text-white">Login</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="mt-3">
+      <div class="container border-bottom border-1 border-black mb-4">
+        <div class="row">
+          <div class="col-12"><h1>Navn Navnesen</h1></div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="card col-12 col-md-5 border-0 bg-transparent pb-4">
+            <img
+              src="img/foto-sushi-6anudmpILw4-unsplash.jpg"
+              alt="User profile photo"
+              class="img-fluid h-100"
+            />
+            <div class="card-body px-0">
+              <div class="d-flex flex-row align-items-end">
+                <h5 class="card-title">Navn Navnesen</h5>
+                <div class="btn-group ms-2">
+                  <a href="#" class="btn btn-primary">Edit</a>
+                </div>
+              </div>
+
+              <p class="fs-6 fst-italic">Oslo</p>
+              <h5>About me</h5>
+              <p class="card-text border-bottom border-1 border-black pb-2">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit,
+                laborum Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
+                consectetur adipisicing elit. Quae, quis.
+              </p>
+            </div>
+          </div>
+          <div class="col-12 col-md-7 mb-4">
+            <div
+              class="d-flex flex-column gap-2 border-bottom border-1 border-black"
+            >
+              <div class="border-bottom border-1 border-black">
+                <h5 class="text-decoration-underline">
+                  This is a post heading
+                </h5>
+                <div class="fst-italic">John Smith, 16. November 2022</div>
+                <p>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Provident minima nisi id numquam iste hic iusto eveniet
+                  adipisci veniam maiores at dolor dolorem iure doloremque,
+                  pariatur harum dolore commodi ab.
+                </p>
+              </div>
+              <div class="border-bottom border-1 border-black">
+                <h5 class="text-decoration-underline">
+                  This is a post heading
+                </h5>
+                <div class="fst-italic">John Smith, 14. November 2022</div>
+                <p>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Provident minima nisi id numquam iste hic iusto eveniet
+                  adipisci veniam maiores at dolor dolorem iure doloremque,
+                  pariatur harum dolore commodi ab.
+                </p>
+              </div>
+              <div class="border-bottom border-1 border-black">
+                <h5 class="text-decoration-underline">
+                  This is a post heading
+                </h5>
+                <div class="fst-italic">John Smith, 10. November 2022</div>
+                <p>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Provident minima nisi id numquam iste hic iusto eveniet
+                  adipisci veniam maiores at dolor dolorem iure doloremque,
+                  pariatur harum dolore commodi ab.
+                </p>
+              </div>
+            </div>
+            <form class="w-100 mt-2">
+              <div class="form-group mb-4">
+                <label for="blogPost">Write something to Navn Navnesen</label>
+                <textarea
+                  class="form-control"
+                  id="blogPost"
+                  rows="3"
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Post</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="bg-primary pb-5 pt-4">
+      <div class="container d-flex justify-content-center">
+        <div class="row">
+          <ul class="col-6 nav flex-column">
+            <li class="nav-item">
+              <a
+                class="nav-link active text-white"
+                aria-current="page"
+                href="index.html"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="login.html">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="profile.html"
+                >Your profile</a
+              >
+            </li>
+          </ul>
+          <ul class="col-6 nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active text-white" aria-current="page" href="#"
+                >About us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">Contact us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">Our vision</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
