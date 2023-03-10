@@ -26,7 +26,6 @@ async function getPost() {
       title,
       body,
       updated,
-      id,
       author: { name },
     } = json;
     postContainer.innerHTML = `<div class="card col-12 col-lg-5 border-0 bg-transparent pb-4 box-shadow-custom pt-3">

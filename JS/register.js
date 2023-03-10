@@ -41,6 +41,7 @@ async function registerUser() {
     if (json.id) {
       //checks if the server returns an object with an "ID" property, if it doesn't errormessages are shown.
       errorContainer.innerHTML = `<h3>User created!</h3>`;
+      location.assign("feed.html");
     } else {
       const errorArray = json.errors;
       errorArray.forEach((errormessage) => {

@@ -52,12 +52,12 @@ const getPosts = async () => {
       }
       postContainer.innerHTML += `<div class="card col-12 col-lg-5 border-0 bg-transparent pb-4 box-shadow-custom pt-3">
       <div class="card-body px-0">
-        <h5 id="title-${id}" class="card-title">
+        <h5  class="card-title">
           ${title}
         </h5>
         <p class="fs-6 fst-italic"><a href="profile.html?name=${name}">${name}</a></p>
         <p class="fs-6 fst-italic">${updated}</p>
-        <p class="card-text" id="body-${id}>
+        <p class="card-text">
           ${body}
         </p>
         <div class="btn-group">
@@ -212,7 +212,7 @@ filter.addEventListener("click", () => {
         </h5>
         <p class="fs-6 fst-italic"><a href="profile.html?name=${name}">${name}</a></p>
         <p class="fs-6 fst-italic">${updated}</p>
-        <p class="card-text" id="body-${id}>
+        <p class="card-text">
           ${body}
         </p>
         <div class="btn-group">
