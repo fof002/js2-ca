@@ -6,8 +6,10 @@ const urlCreatePost = API_BASE_URL + "social/posts";
 const postContainer = document.querySelector("#post-container");
 const postContent = document.querySelector("#blog-post");
 const postTitle = document.querySelector("#post-title");
-const modal = document.querySelector("#exampleModal");
 const search = document.querySelector("#search");
+const filter = document.querySelector("#flexSwitchCheckDefault");
+let deleteButton = "";
+let viewButton = "";
 let postData = {};
 let json = {};
 
@@ -27,8 +29,10 @@ const getPosts = async () => {
     };
     const response = await fetch(url, getData);
     json = await response.json();
+    console.log(json);
     postContainer.innerHTML = "";
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 20; i++) {
+      deleteButton = "";
       const {
         title,
         body,
@@ -36,20 +40,30 @@ const getPosts = async () => {
         id,
         author: { name },
       } = json[i];
+      console.log(localStorage.getItem("user"));
+      if (localStorage.getItem("user") === name) {
+        deleteButton = `<a id=${id}" class="btn btn-primary delete-button">Delete</a>
+        `;
+        viewButton = `<a href="edit-post.html?id=${id}" class="btn btn-primary delete-button">Edit</a>
+        `;
+      } else {
+        viewButton = `<a href="post.html?id=${id}" class="btn btn-primary">View</a>
+`;
+      }
       postContainer.innerHTML += `<div class="card col-12 col-lg-5 border-0 bg-transparent pb-4 box-shadow-custom pt-3">
-  
       <div class="card-body px-0">
-        <h5 class="card-title">
+        <h5 id="title-${id}" class="card-title">
           ${title}
         </h5>
-        <p class="fs-6 fst-italic"><a href="profile.html/?name=${name}">${name}</a></p>
+        <p class="fs-6 fst-italic"><a href="profile.html?name=${name}">${name}</a></p>
         <p class="fs-6 fst-italic">${updated}</p>
-        <p class="card-text">
+        <p class="card-text" id="body-${id}>
           ${body}
         </p>
         <div class="btn-group">
-          <a href="profile.html/?name=${name}" class="btn btn-primary">Profile</a>
-          <a href="post.html?id=${id}" class="btn btn-primary">View</a>
+          <a href="profile.html?name=${name}" class="btn btn-primary">Profile</a>
+          ${viewButton}
+          ${deleteButton}
         </div>
       </div>
     </div>`;
@@ -84,7 +98,6 @@ async function sendPostData(userInput) {
     };
     const response = await fetch(urlCreatePost, sendData);
     const json = await response.json();
-    console.log(json);
     if (json.title) {
       postTitle.value = "";
       postContent.value = "";
@@ -142,4 +155,76 @@ search.addEventListener("keydown", () => {
   }
 });
 //--------------------------------------------
-/* */
+//--------------------------------------delete button
+document.addEventListener("click", (event) => {
+  if (event.target.matches(".delete-button")) {
+    const buttonId = parseFloat(event.target.id);
+    const urlDeletePost = API_BASE_URL + `social/posts/${buttonId}`;
+    deletePost(urlDeletePost);
+  }
+});
+
+async function deletePost(urlParamDelete) {
+  try {
+    const token = localStorage.getItem("accessToken");
+    const sendData = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const response = await fetch(urlParamDelete, sendData);
+    const json = await response.json();
+    console.log(json);
+    getPosts();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+//--------------------filter feed on click
+filter.addEventListener("click", () => {
+  if (!filter.classList.contains("active-filter")) {
+    filter.classList.add("active-filter");
+    postContainer.innerHTML = "";
+    const filteredResults = json.filter((post) => {
+      if (post.author.name === localStorage.getItem("user")) {
+        return true;
+      }
+    });
+    filteredResults.forEach((post) => {
+      const {
+        title,
+        body,
+        updated,
+        id,
+        author: { name },
+      } = post;
+      deleteButton = `<a id=${id}" class="btn btn-primary delete-button">Delete</a>
+      `;
+      viewButton = `<a href="edit-post.html?id=${id}" class="btn btn-primary delete-button">Edit</a>
+      `;
+      postContainer.innerHTML += `<div class="card col-12 col-lg-5 border-0 bg-transparent pb-4 box-shadow-custom pt-3">
+      <div class="card-body px-0">
+        <h5 id="title-${id}" class="card-title">
+          ${title}
+        </h5>
+        <p class="fs-6 fst-italic"><a href="profile.html?name=${name}">${name}</a></p>
+        <p class="fs-6 fst-italic">${updated}</p>
+        <p class="card-text" id="body-${id}>
+          ${body}
+        </p>
+        <div class="btn-group">
+          <a href="profile.html?name=${name}" class="btn btn-primary">Profile</a>
+          ${viewButton}
+          ${deleteButton}
+        </div>
+      </div>
+    </div>`;
+    });
+  } else {
+    filter.classList.remove("active-filter");
+    getPosts();
+  }
+});
