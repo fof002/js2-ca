@@ -32,7 +32,7 @@ async function logInUser(userInput) {
     if (json.accessToken) {
       const accessToken = json.accessToken;
       localStorage.setItem("accessToken", accessToken);
-      location.assign("register.html");
+      location.assign("feed.html");
     } else {
       errorContainer.innerHTML = "Invalid username or password";
       passwordInput.innerHTML = "";
