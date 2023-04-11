@@ -23,9 +23,10 @@ registerButton.addEventListener("click", () => {
     errorContainer.innerHTML = `Something went wrong. Please try again or contatct us`;
   }
 });
-//----------------------------------
-
-//Function for registering user
+//-------------------------------------------
+/**
+ * Function for registering user
+ */
 async function registerUser() {
   try {
     const postData = {
@@ -52,8 +53,9 @@ async function registerUser() {
     errorContainer.innerHTML = error;
   }
 }
-
-//function for creating userinput from input fields
+/**
+ * Creates user input from input fields
+ */
 const createUserInput = () => {
   userInput = {
     name: nameInput.value.trim(),
@@ -66,6 +68,9 @@ const createUserInput = () => {
 //validate input in registration fields
 document.addEventListener("keyup", validateUserInput);
 
+/**
+ * Function for validating userinput
+ */
 function validateUserInput() {
   errorUl.innerHTML = "";
   errorContainer.innerHTML = "";
@@ -87,13 +92,3 @@ function validateUserInput() {
   }
 }
 //-----------------------------------------------
-/*//function print onLoad
-const url = new URL(document.location);
-const printPage = () => {
-  if (url.searchParamsurl.get("print") === true) {
-    document.printPage();
-  }
-};
-document.addEventListener("afterPrint", () => {
-  location.assign("url til nasjonale ops");
-}); */

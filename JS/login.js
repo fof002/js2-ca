@@ -17,6 +17,11 @@ loginButton.addEventListener("click", (event) => {
 
 //------------------Function for API call for login
 
+/**
+ * Function for login in user. Post request to the server
+ * @param {object} userInput - expects an object with email and password as properties
+ */
+
 async function logInUser(userInput) {
   try {
     const postData = {
@@ -44,7 +49,6 @@ async function logInUser(userInput) {
 }
 
 //------------------Creating login-input
-
 const getLoginInput = () => {
   loginInput = {
     email: emailInput.value.trim(),

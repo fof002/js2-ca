@@ -6,7 +6,6 @@ const queryId = params.get("id");
 console.log(queryId);
 const postContainer = document.querySelector("#post-container");
 let postData = {};
-
 const url =
   API_BASE_URL +
   `social/posts/${queryId}?_author=true&_comments=true&_reactions=true`;

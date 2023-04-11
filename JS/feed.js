@@ -14,6 +14,10 @@ let postData = {};
 let json = {};
 
 //-----------------Get posts for feed
+/**
+ * This function gets the posts for the blog feed
+ * @returns the blogposts from the server
+ */
 const getPosts = async () => {
   try {
     postContainer.innerHTML = `<div class="spinner-border text-primary" role="status">
@@ -74,9 +78,9 @@ const getPosts = async () => {
 };
 getPosts();
 
-//----------------------------------------------
+//----------------------------------------------------------
 
-//----------------------create blog post
+//----------------------create blog post--------------------
 
 document.addEventListener("click", (event) => {
   if (event.target.matches("#create-post-button")) {
@@ -84,7 +88,10 @@ document.addEventListener("click", (event) => {
     sendPostData(postData);
   }
 });
-
+/**
+ * This function sends data to the API
+ * @param {object} userInput - The input from the user, fetched from the userinput function
+ */
 async function sendPostData(userInput) {
   try {
     const token = localStorage.getItem("accessToken");
@@ -114,8 +121,16 @@ const getPostInput = () => {
     body: postContent.value,
   };
 };
-//--------------------------search function
+//--------------------------search function--------------------------------------
+
 search.addEventListener("keydown", () => {
+  searchBlogs();
+});
+
+/**
+ * Filters blog posts based on input. Searches in both title and body.
+ */
+function searchBlogs() {
   if (search.value.length > 1) {
     postContainer.innerHTML = "";
     const filteredResults = json.filter((post) => {
@@ -135,25 +150,25 @@ search.addEventListener("keydown", () => {
         author: { name },
       } = post;
       postContainer.innerHTML += `<div class="card col-12 col-lg-5 border-0 bg-transparent pb-4 box-shadow-custom pt-3">
-  
-        <div class="card-body px-0">
-          <h5 class="card-title">
-            ${title}
-          </h5>
-          <p class="fs-6 fst-italic"><a href="profile.html/?name=${name}">${name}</a></p>
-          <p class="fs-6 fst-italic">${updated}</p>
-          <p class="card-text">
-            ${body}
-          </p>
-          <div class="btn-group">
-            <a href="profile.html/?name=${name}" class="btn btn-primary">Profile</a>
-            <a href="post.html?id=${id}" class="btn btn-primary">View</a>
-          </div>
+
+      <div class="card-body px-0">
+        <h5 class="card-title">
+          ${title}
+        </h5>
+        <p class="fs-6 fst-italic"><a href="profile.html/?name=${name}">${name}</a></p>
+        <p class="fs-6 fst-italic">${updated}</p>
+        <p class="card-text">
+          ${body}
+        </p>
+        <div class="btn-group">
+          <a href="profile.html/?name=${name}" class="btn btn-primary">Profile</a>
+          <a href="post.html?id=${id}" class="btn btn-primary">View</a>
         </div>
-      </div>`;
+      </div>
+    </div>`;
     });
   }
-});
+}
 //--------------------------------------------
 //--------------------------------------delete button
 document.addEventListener("click", (event) => {
@@ -163,7 +178,10 @@ document.addEventListener("click", (event) => {
     deletePost(urlDeletePost);
   }
 });
-
+/**
+ * Makes an API call by method delete - deletes by ID of the post, fetched from the button
+ * @param {string} urlParamDelete - The url with ID of the post to delete.
+ */
 async function deletePost(urlParamDelete) {
   try {
     const token = localStorage.getItem("accessToken");
@@ -182,7 +200,6 @@ async function deletePost(urlParamDelete) {
     console.log(error);
   }
 }
-
 //--------------------filter feed on click
 filter.addEventListener("click", () => {
   if (!filter.classList.contains("active-filter")) {
