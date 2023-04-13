@@ -6,11 +6,28 @@ const nameInput = document.querySelector("#name");
 const emailInput = document.querySelector("#email");
 const passwordInput = document.querySelector("#password");
 const errorContainer = document.querySelector("#error-container");
+const errorUl = document.querySelector("#error-ul");
 let userInput = {};
 
-// -----------------registrers user
-registerButton.addEventListener("click", async () => {
-  createUserInput();
+// -----------------registrers user eventlistener
+registerButton.addEventListener("click", () => {
+  if (
+    nameInput.value.trim().length < 20 &&
+    emailInput.value.includes("@noroff.no") &&
+    passwordInput.value.trim().length >= 8
+  ) {
+    createUserInput();
+    console.log(userInput);
+    registerUser();
+  } else {
+    errorContainer.innerHTML = `Something went wrong. Please try again or contatct us`;
+  }
+});
+//-------------------------------------------
+/**
+ * Function for registering user
+ */
+async function registerUser() {
   try {
     const postData = {
       method: "POST",
@@ -21,19 +38,57 @@ registerButton.addEventListener("click", async () => {
     };
     const response = await fetch(registerUserUrl, postData);
     const json = await response.json();
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-//function for creating userinput from input fields
-const createUserInput = () => {
-  !nameInput.value || !emailInput.value || !passwordInput.value
-    ? (errorContainer.innerHTML = `Fill out all the fields`)
-    : (userInput = {
-        name: nameInput.value.trim(),
-        email: emailInput.value.trim(),
-        password: passwordInput.value.trim(),
+    console.log(json);
+    if (json.id) {
+      //checks if the server returns an object with an "ID" property, if it doesn't errormessages are shown.
+      errorContainer.innerHTML = `<h3>User created!</h3>`;
+      location.assign("feed.html");
+    } else {
+      const errorArray = json.errors;
+      errorArray.forEach((errormessage) => {
+        errorUl.innerHTML += `<li>${errormessage.message}</li>`;
       });
+    }
+  } catch (error) {
+    errorContainer.innerHTML = error;
+  }
+}
+/**
+ * Creates user input from input fields
+ */
+const createUserInput = () => {
+  userInput = {
+    name: nameInput.value.trim(),
+    email: emailInput.value.trim(),
+    password: passwordInput.value.trim(),
+  };
 };
 //---------------------------------------
+
+//validate input in registration fields
+document.addEventListener("keyup", validateUserInput);
+
+/**
+ * Function for validating userinput
+ */
+function validateUserInput() {
+  errorUl.innerHTML = "";
+  errorContainer.innerHTML = "";
+  if (passwordInput.value.trim().length < 8) {
+    errorUl.innerHTML += `<li>Password must be at least 8 characters</li>`;
+  }
+  if (!emailInput.value.includes("@noroff.no")) {
+    errorUl.innerHTML += `<li>Only noroff.no emails are allowed to register</li>`;
+  }
+  if (nameInput.value.trim().length > 20) {
+    errorUl.innerHTML += `<li>Name cannot be greater than 20 characters</li>`;
+  }
+  if (
+    nameInput.value.trim().length < 20 &&
+    emailInput.value.includes("@noroff.no") &&
+    passwordInput.value.trim().length >= 8
+  ) {
+    errorContainer.innerHTML = `Looks good!`;
+  }
+}
+//-----------------------------------------------
